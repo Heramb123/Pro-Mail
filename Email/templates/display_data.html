@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+</head>
+<body>
+    <h1>User Profile</h1>
+    <p><strong>Name:</strong> {{ user["name"] }}</p>
+    <p><strong>Email:</strong> {{ user["email"] }}</p>
+    <p><strong>Designation:</strong> {{ user["designation"] }}</p>
+    <p><strong>Shared Key:</strong> {{ user["shared_key"] }}</p>
+    <p><strong>Student/Faculty :</strong> {{ user["registering_as"] }}</p>
+
+    <form  action="/update-profile/{{ user.email }}">
+        <a href="/dashboard" style="float:right">Dashboard</a>
+        <button type="submit">Update Profile</button>
+    </form>
+    <form method="POST"  action="/delete-profile/{{ user.email }}" method="post">
+        <button type="submit">Delete Profile</button>
+    </form>
+</body>
+</html>

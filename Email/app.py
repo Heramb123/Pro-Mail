@@ -173,11 +173,33 @@ def logout():
 
 #Dashboard Module: Update Profile
 #@app.route('/update_profile', methods=['GET', 'POST'])
+@app.route("/edit", methods=['GET', 'POST'])
+def display_profile():
 
+    user_email = session['email'] # replace with code to get logged-in user's email
+    user = users_collection.find_one({"email": user_email})
+    return render_template("display_data.html", user=user)
 
+@app.route("/update-profile/<email>", methods=["GET", "POST"])
+def update_profile(email):
+    user = users_collection.find_one({"email": email})
+    
+    if request.method == "POST":
+        name = request.form["name"]
+        designation = request.form["designation"]
+        email = request.form["email"]
+        shared_key = request.form["shared_key"]
+        Type = request.form["type"]
+        users_collection.update_one({"email": email}, {"$set": {"name": name, "designation": designation, "email":email, "shared_key":shared_key, "registering_as":Type}})
+        return redirect("/edit")
+    return render_template("update_profile.html", user=user)
 
-
-
+@app.route("/delete-profile/<email>", methods=["GET","POST"])
+def delete_profile(email):
+    users_collection.delete_one({"email": email})
+    session.pop('username', None)
+    session.pop('registering_as', None)
+    return render_template('home.html')
 
 
 

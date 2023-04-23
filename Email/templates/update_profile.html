@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Update Profile</title>
-  </head>
-  <body>
+</head>
+<body>
     <h1>Update Profile</h1>
-    <form method="POST">
-      <label for="username">Username:</label>
-      <label id="username" name="username" value="{{ user.username }}"><br><br>
-      <label for="email">Email:</label>
-      <label type="email" id="email" name="email" value="{{ user.email }}"><br><br>
-      <label for="password">Password:</label>
-      <label id="password" name="password"><br><br>
-      <button type="submit">Edit</button>
+    <form method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="{{ user["name"] }}">
+        <br><br>
+        <label for="designation">Designation:</label>
+        <input type="text" id="designation" name="designation" value="{{ user["designation"] }}">
+        <br><br>
+        <label for="name">Email:</label>
+        <input type="text" id="email" name="email" value="{{ user["email"] }}">
+        <br><br>
+        <label for="name">Shared key:</label>
+        <input type="text" id="shared_key" name="shared_key" value="{{ user["shared_key"] }}">
+        <br><br>
+        <label for="name">Student/Faculty:</label>
+        <input type="type" id="" name="type" value="{{ user["registering_as"] }}">
+        <br><br>
+        <input type="submit" value="Save Changes">
     </form>
-  </body>
+</body>
 </html>
