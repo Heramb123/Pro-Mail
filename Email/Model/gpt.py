@@ -1,7 +1,7 @@
 import os
 import openai
 
-openai.api_key="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"
+openai.api_key="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"
 
 
 def api(content):

@@ -3,6 +3,7 @@ from flask_mail import Mail, Message
 from pymongo import MongoClient
 import hashlib
 from Model import gpt,styl
+import json
 
 
 message=""
@@ -70,6 +71,7 @@ def dashboard():
     global subject,message,reciever,email
     message1=""
     content=""
+    li=[]
     
     if 'username' in session and 'registering_as' in session:
         username = session['username']
@@ -97,9 +99,9 @@ def dashboard():
                 reciever=request.form['keyword']
                 print(reciever)
 
-                li = list(reciever.split(","))
                 if selected_engine=='1':
-                    content=" Generate A Formal Mail on the below mentioned points. Dont include subject \n"+message+"\n The Sender is:"+username+"and The Reciever: "+str(email.keys())
+                    
+                    content="Generate A Formal Mail on the below mentioned points. Dont include subject \n Points \n "+message+"\n Note: The Sender is:"+username+"Dont Include Any Reciepent Name field"
                     message=gpt.api(content)
              
             
@@ -148,7 +150,7 @@ def button():
     print(list(email.values()))
     recipients=list(email.values())
 
-    msg = Message(subject, sender='herambpawar1307@gmail.com', recipients=recipients)
+    msg = Message(subject, sender=session['email'], recipients=recipients)
     msg.body = message
     print(subject,message,reciever)
 
