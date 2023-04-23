@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Registration</h1>
+	{% if error %}
+		<p style="color: red;">Email Already Exists</p>
+	{% endif %}
+	<form method="POST" action="/submit">
+		<label for="registering_as">Registering as:</label><br>
+		<required><input type="radio" id="student" name="registering_as" value="Student">
+			<label for="student">Student</label><br>
+			<input type="radio" id="faculty" name="registering_as" value="Faculty">
+			<label for="faculty">Faculty</label></required>
+		<br><br>
+
+		<label for="name">Name:</label><br>
+		<input type="text" id="name" name="name" required><br><br>
+
+		<label for="password">Password:</label><br>
+		<input type="password" id="password" name="password" required><br><br>
+
+		<label for="email">Email:</label><br>
+		<input type="email" id="email" name="email" required><br><br>
+
+		<label for="designation">Designation:</label><br>
+		<input type="text" id="designation" name="designation" ><br><br>
+
+		<label for="shared_key">Shared Key:</label><br>
+		<input type="text" id="shared_key" name="shared_key" required><br><br>
+
+		
+		
+		
+
+		<input type="submit" value="Submit">
+	</form>
+
+    <a href="{{url_for('login')}}">Already Have An Account ?</a><br>
+</body>
+</html>

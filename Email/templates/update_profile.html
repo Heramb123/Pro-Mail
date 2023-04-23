@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Update Profile</title>
+  </head>
+  <body>
+    <h1>Update Profile</h1>
+    <form method="POST">
+      <label for="username">Username:</label>
+      <label id="username" name="username" value="{{ user.username }}"><br><br>
+      <label for="email">Email:</label>
+      <label type="email" id="email" name="email" value="{{ user.email }}"><br><br>
+      <label for="password">Password:</label>
+      <label id="password" name="password"><br><br>
+      <button type="submit">Edit</button>
+    </form>
+  </body>
+</html>
