@@ -38,46 +38,186 @@
           background-color: #f8f8f8;
           resize: none;
         }
+
+        .button{
+          font-size: 15px;
+          width: 20%;
+          padding: 10px 8px;
+          box-sizing: border-box;
+          border: 2px solid #ccc;
+          border-radius: 4px;
+          background-color: #f8f8f8;
+          resize: none;
+          border-radius: 15px;
+          margin-top: 10px;
+        }
+        
+        .sb_button{
+          font-size: 15px;
+          width: 20%;
+          padding: 10px 8px;
+          box-sizing: border-box;
+          border: 2px solid #ccc;
+          border-radius: 4px;
+          color: white;
+          background-color: #3361b8;
+          resize: none;
+          border-radius: 15px;
+          margin-top: 10px;
+          position: absolute;
+          left: 40%;
+          top: 175%;
+          z-index: 100000000;
+        }
+
+        .engine{
+          padding: 7px;
+          border-radius: 15px;
+        }
+
+        input {
+          font-size: 18px;
+          width: 100%;
+          padding: 12px 20px;
+          box-sizing: border-box;
+          border: 2px solid #ccc;
+          border-radius: 10px;
+          background-color: #f8f8f8;
+          resize: none;
+        }
+
+       
+		body{
+			background-color: #ffffff;
+		}
+		.background{
+			width: 430px;
+			height: 520px;
+			position: absolute;
+			transform: translate(-50%,-50%);
+			left: 50%;
+			top: 50%;
+		}
+		.background .shape{
+			height: 200px;
+			width: 200px;
+			position: absolute;
+			border-radius: 50%;
+		}
+
+    .background .shape2{
+			height: 200px;
+			width: 200px;
+			position: relative;
+			border-radius: 50%;
+		}
+
+		.shape{
+			background: linear-gradient(
+				#1845ad,
+				#23a2f6
+			);
+			left: -400px;
+			top: -25px;
+		}
+		.shape2{
+			background: linear-gradient(
+				to right,
+				#ff512f,
+				#f09819
+			);
+			right: -32vw;
+			bottom: -150vh;
+      z-index: -1000;
+		}
+
+    .form1{
+      margin-top: 25vw;
+			width: 1000px;
+			background-color: rgba(242, 225, 225, 0.13);
+			position: absolute;
+			transform: translate(-50%,-50%);
+			top: 50%;
+			left: 50%;
+      backdrop-filter: blur(10px);
+			border-radius: 10px;
+			border: 2px solid rgba(0, 0, 0, 0.1);
+			box-shadow: 0 0 40px rgba(8,7,16,0.6);
+			padding: 50px 35px;
+      z-index: 1000;
+		}
+
+    textarea{
+      background-color: transparent;
+    }
+
+    #keyword{
+      height: 60px;
+    }
+
+    .sel_engine{
+      font-size: 1.4rem;
+    }
       </style>
     </head>
   
     <body>
+      <div class="background">
+        <div class="shape"></div>
+      </div>
       <form  method="post">
         <nav>
           <a href="#">Dashboard</a>
           <a href="/logout" style="float:right">Logout</a>
           <a href="/edit" class="active" style="float:right">Update Profile</a>
         </nav>
-        <h1>Welcome, {{ username }}!</h1>
-        <p>You are registered as a {{ registering_as }}.</p><br><br>
-        <label for="engine">Reciever</label>
-        
+    
       </form>
 
-      <form method="POST">
+      <form class="form1" method="POST">
+        <h2>Welcome, {{ username }}!</h2>
+        <p>You are registered as a {{ designation }}.</p><br>
+        <h2>Reciver:</h2>
         <textarea id='keyword' name="keyword" placeholder="separate mail by , as delimiter">{{ reciever }}</textarea>
-        <input type="submit" name="seabtn" value="Search">
-  
+        <input class="button" type="submit" name="seabtn" value="Search">
+        <br><br>
       
         <h2>Mail:</h2>
 	      <textarea id='area' name="area" placeholder="Mention Generalized Raw Points On Which U want to Generate the Formal Mail">{{ message1 }}</textarea>
-
-          <label for="engine">Select an Engine:</label>
-          <select name="engine" id="engine">
+        <br>
+        <br>
+        <br>
+          <b class="sel_engine">Select an Engine:</b>
+          <select class="engine" name="engine" id="engine">
             <option value="1">Engine 1 (Highly Recommended)</option>
             <option value="2">Engine 2 </option>
           </select>
-       <input  type="submit" name="gbtn" value="Generate Mail">
+          <br>
+        <input class="button"  type="submit" name="gbtn" value="Generate Mail">
+        <br>
+        <br>
 
         <h2>Formalized Mail:</h2>
-        <textarea id="selected_engine">{{ message }}</textarea>
+        <textarea id="selected_engine" placeholder="Formalized mail will appear here">{{ message }}</textarea>
+        <br>
+        <br>
         <h2>Suggested Subject For Mail</h2>
-	      <textarea id='area3' name="area3" placeholder="Suggested Subjects">{{subject}}</textarea>    
-  </form>
-  <form method="POST" action="/button">
-    <button type="submit">Send Mail</button>
-  </form>
-  
+	      <textarea id='area3' name="area3" placeholder="Suggested Subjects">{{subject}}</textarea>  
+      
+          <br>
+          <br>
+
+      </form>
+
+      <form method="POST" action="/button">
+        <button class="sb_button" type="submit">Send Mail</button>
+      </form>
+
+
+      <div class="background">
+        <div class="shape2"></div>
+        
+      </div>
 
   </body>
 </html>

@@ -2,21 +2,179 @@
 <html>
 <head>
     <title>User Profile</title>
+    <style>
+        *,
+		*:before,
+		*:after{
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+		}
+		body{
+			background-color: #ffffff;
+		}
+		.background{
+			width: 430px;
+			height: 520px;
+			position: absolute;
+			transform: translate(-50%,-50%);
+			left: 50%;
+			top: 50%;
+		}
+		.background .shape{
+			height: 200px;
+			width: 200px;
+			position: absolute;
+			border-radius: 50%;
+		}
+		.shape:first-child{
+			background: linear-gradient(
+				#1845ad,
+				#23a2f6
+			);
+			left: -220px;
+			top: -15px;
+		}
+		.shape:last-child{
+			background: linear-gradient(
+				to right,
+				#ff512f,
+				#f09819
+			);
+			right: -230px;
+			bottom: -10px;
+		}
+		.container{
+			width: 700px;
+			background-color: rgba(255, 255, 255, 0.13);
+			position: absolute;
+			transform: translate(-50%,-50%);
+			top: 50%;
+			left: 50%;
+			border-radius: 10px;
+			backdrop-filter: blur(10px);
+			border: 2px solid rgba(0, 0, 0, 0.1);
+			box-shadow: 0 0 40px rgba(8,7,16,0.6);
+			padding: 50px 35px;
+            display: flex;
+            flex-direction: column;
+		}
+		form *{
+			font-family: 'Poppins',sans-serif;
+			color: #000000;
+			letter-spacing: 0.5px;
+			outline: none;
+			border: none;
+		}
+		form h3{
+			font-size: 32px;
+			font-weight: 500;
+			line-height: 42px;
+			text-align: center;
+		}
+		
+		label{
+			display: block;
+			margin-top: 30px;
+			font-size: 16px;
+			font-weight: 500;
+		}
+		input{
+			display: block;
+			height: 50px;
+			width: 100%;
+			background-color: rgba(0, 0, 0, 0.07);
+			border-radius: 3px;
+			padding: 0 10px;
+			margin-top: 8px;
+			font-size: 14px;
+			font-weight: 300;
+		}
+		::placeholder{
+			color: #030000;
+		}
+		button{
+			margin-top: 30px;
+			width: 100%;
+            border-radius: 20px;
+			background-color: #425a8b;
+			color: #ffffff;
+			padding: 15px 10px;
+			font-size: 18px;
+			font-weight: 600;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+        .container2{
+            display: flex;
+        }
+        .buttons{
+            margin-left: 15px;
+            margin-top: -1.2rem;
+        }
+        .vertical-hr {
+            border-left: 1px solid black;
+            height: 150px;
+            margin-left: 55px;
+            margin-right: 75px;
+        }
+        nav {
+          background-color: #333;
+          overflow: hidden;
+        }
+    
+        nav a {
+          float: left;
+          color: white;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+          font-size: 17px;
+        }
+    
+        nav a:hover {
+          background-color: #ddd;
+          color: black;
+        }
+    
+        .active {
+          background-color: #4CAF50;
+          color: white;
+        }
+    </style>
 </head>
 <body>
-    <h1>User Profile</h1>
-    <p><strong>Name:</strong> {{ user["name"] }}</p>
-    <p><strong>Email:</strong> {{ user["email"] }}</p>
-    <p><strong>Designation:</strong> {{ user["designation"] }}</p>
-    <p><strong>Shared Key:</strong> {{ user["shared_key"] }}</p>
-    <p><strong>Student/Faculty :</strong> {{ user["registering_as"] }}</p>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <form  method="post">
+        <nav>
+          <a href="/logout" style="float:right">Logout</a>
+          <a href="/dashboard" style="float:right">Dashboard</a>
+        </nav>
+    </form>
+    <div class="container">
+        <center><h1>User Profile</h1><br></center><br>
+        <div class="container2">
+            <div>
+                <p><strong>Name:</strong> {{ user["name"] }}</p><br>
+                <p><strong>Email:</strong> {{ user["email"] }}</p><br>
+                <p><strong>Designation:</strong> {{ user["designation"] }}</p><br>
+                <p><strong>Shared Key:</strong> {{ user["shared_key"] }}</p><br>
+            </div>
 
-    <form  action="/update-profile/{{ user.email }}">
-        <a href="/dashboard" style="float:right">Dashboard</a>
-        <button type="submit">Update Profile</button>
-    </form>
-    <form method="POST"  action="/delete-profile/{{ user.email }}" method="post">
-        <button type="submit">Delete Profile</button>
-    </form>
+            <div class="vertical-hr"></div>
+            
+            <div class="buttons">        
+                <form  action="/update-profile/{{ user.email }}">
+                    <button type="submit">Update Profile</button>
+                </form>
+                <form method="POST"  action="/delete-profile/{{ user.email }}" method="post">
+                    <button type="submit">Delete Profile</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

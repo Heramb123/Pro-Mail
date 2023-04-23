@@ -3,7 +3,7 @@ from flask_mail import Mail, Message
 from pymongo import MongoClient
 import hashlib
 from Model import gpt,styl
-import json
+
 
 
 message=""
@@ -53,7 +53,7 @@ def authenticate():
         user = users_collection.find_one({"email": email, "password": hashed_password})
         if user is not None:
             session['username'] = user['name']
-            session['registering_as'] = user['registering_as']
+            session['designation'] = user['designation']
             session['email']=user['email']
             
             return redirect(url_for('dashboard'))
@@ -74,9 +74,9 @@ def dashboard():
     content=""
 
     
-    if 'username' in session and 'registering_as' in session:
+    if 'username' in session and 'designation' in session:
         username = session['username']
-        registering_as = session['registering_as']
+        registering_as = session['designation']
 
         if request.method=='POST':
             
@@ -158,7 +158,7 @@ def button():
 
     mail.send(msg)
     
-    return 'Mail Sent'
+    return render_template("mail_sent.html")
 
     
    
@@ -168,11 +168,11 @@ def button():
 @app.route('/logout')
 def logout():
     session.pop('username', None)
-    session.pop('registering_as', None)
+    session.pop('designation', None)
     return redirect(url_for('login'))
 
 #Dashboard Module: Update Profile
-#@app.route('/update_profile', methods=['GET', 'POST'])
+
 @app.route("/edit", methods=['GET', 'POST'])
 def display_profile():
 
@@ -189,8 +189,8 @@ def update_profile(email):
         designation = request.form["designation"]
         email = request.form["email"]
         shared_key = request.form["shared_key"]
-        Type = request.form["type"]
-        users_collection.update_one({"email": email}, {"$set": {"name": name, "designation": designation, "email":email, "shared_key":shared_key, "registering_as":Type}})
+        
+        users_collection.update_one({"email": email}, {"$set": {"name": name, "designation": designation, "email":email, "shared_key":shared_key}})
         return redirect("/edit")
     return render_template("update_profile.html", user=user)
 
@@ -198,7 +198,7 @@ def update_profile(email):
 def delete_profile(email):
     users_collection.delete_one({"email": email})
     session.pop('username', None)
-    session.pop('registering_as', None)
+    session.pop('designation', None)
     return render_template('home.html')
 
 
@@ -220,7 +220,7 @@ def submit():
      email = request.form['email']
      
      shared_key = request.form['shared_key']
-     registering_as = request.form['registering_as']
+     #registering_as = request.form['registering_as']
      designation = request.form.get('designation', '') # Set default value to empty string
 
     # Check if the email already exists in the collection
@@ -233,7 +233,7 @@ def submit():
         'password': password,
         'email': email,
         'shared_key': shared_key,
-        'registering_as': registering_as,
+        #'registering_as': registering_as,
         'designation': designation
     }
      users_collection.insert_one(user)

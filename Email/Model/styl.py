@@ -11,6 +11,7 @@ def style(msg):
     blob=TextBlob(msg)
     result_list = []
 
+
     for sent in blob.sentences:
         temp_result = styleformer_c_t_f.transfer(sent.string)
         result_list.append(temp_result)
