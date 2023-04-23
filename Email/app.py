@@ -10,6 +10,7 @@ message=""
 reciever=""
 subject=""
 email={}
+li=[]
 
 
 
@@ -68,10 +69,10 @@ def authenticate():
 #User Dashboard Module    
 @app.route('/dashboard', methods=['GET','POST'])
 def dashboard():
-    global subject,message,reciever,email
+    global subject,message,reciever,email,li
     message1=""
     content=""
-    li=[]
+
     
     if 'username' in session and 'registering_as' in session:
         username = session['username']
@@ -98,14 +99,15 @@ def dashboard():
                 selected_engine = request.form['engine']
                 reciever=request.form['keyword']
                 print(reciever)
+                print(selected_engine)
 
                 if selected_engine=='1':
                     
                     content="Generate A Formal Mail on the below mentioned points. Dont include subject \n Points \n "+message+"\n Note: The Sender is:"+username+"Dont Include Any Reciepent Name field"
                     message=gpt.api(content)
              
-            
                 elif selected_engine=='2':
+                    print(message)
                     message=styl.style(message)
                 
                     if len(li)==1:
@@ -131,7 +133,7 @@ def dashboard():
 @app.route('/button',methods=['GET','POST'])
 
 def button():
-    global subject,message,reciever,email
+    global subject,message,reciever,email,li
     result = users_collection.find_one({"email": session['email']})
     shared_key = result['shared_key']
 
